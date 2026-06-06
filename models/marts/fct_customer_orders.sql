@@ -1,4 +1,4 @@
-with orders as (
+with order_records as (
     select
         order_id,
         customer_id,
@@ -8,7 +8,7 @@ with orders as (
     from {{ ref('stg_orders') }}
 ),
 
-customers as (
+customer_records as (
     select
         customer_id,
         customer_name
@@ -16,12 +16,12 @@ customers as (
 )
 
 select
-    orders.order_id,
-    orders.customer_id,
-    customers.customer_name,
-    orders.order_date,
-    orders.amount,
-    orders.status
-from orders
-left join customers
-    on orders.customer_id = customers.customer_id
+    order_records.order_id,
+    order_records.customer_id,
+    customer_records.customer_name,
+    order_records.order_date,
+    order_records.amount,
+    order_records.status
+from order_records
+left join customer_records
+    on order_records.customer_id = customer_records.customer_id

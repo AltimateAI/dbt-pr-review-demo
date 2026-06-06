@@ -44,7 +44,7 @@ jobs:
           dbt compile
 
       - name: Review dbt changes
-        uses: AltimateAI/altimate-code/github/review@v1
+        uses: AltimateAI/altimate-code/github/review@v0.8.3
         with:
           mode: comment
           manifest_path: target/manifest.json

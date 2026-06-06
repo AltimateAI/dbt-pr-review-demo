@@ -60,5 +60,4 @@ jobs:
             --mode comment \
             --manifest target/manifest.json \
             --severity suggestion \
-            --post \
-            --no-ai
+            --post

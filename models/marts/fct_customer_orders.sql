@@ -24,4 +24,4 @@ select
     orders.status
 from orders
 left join customers
-    on orders.customer_id = customers.customer_id
+    on orders.order_id = customers.customer_id

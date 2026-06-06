@@ -11,7 +11,8 @@ with orders as (
 customers as (
     select
         customer_id,
-        customer_name
+        customer_name,
+        email
     from {{ ref('stg_customers') }}
 )
 
@@ -19,6 +20,7 @@ select
     orders.order_id,
     orders.customer_id,
     customers.customer_name,
+    customers.email,
     orders.order_date,
     orders.amount,
     orders.status

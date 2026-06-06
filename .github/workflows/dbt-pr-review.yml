@@ -43,9 +43,22 @@ jobs:
           dbt seed
           dbt compile
 
+      # The current altimate-code release contains broken VS Code image
+      # symlinks, which prevents GitHub from downloading the repository as a
+      # composite action. Install the same release directly until the next
+      # release fixes the action archive.
+      - name: Install Altimate
+        run: curl -fsSL https://www.altimate.sh/install | bash -s -- --version 0.8.3
+
       - name: Review dbt changes
-        uses: AltimateAI/altimate-code/github/review@v0.8.3
-        with:
-          mode: comment
-          manifest_path: target/manifest.json
-          severity_threshold: suggestion
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+        run: |
+          "$HOME/.altimate/bin/altimate" review \
+            --mode comment \
+            --manifest target/manifest.json \
+            --severity suggestion \
+            --post \
+            --no-ai

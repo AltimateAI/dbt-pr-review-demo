@@ -1,0 +1,4 @@
+customer_id,customer_name,email,created_at
+1,Ada Lovelace,ada@example.com,2024-01-03
+2,Grace Hopper,grace@example.com,2024-01-04
+3,Katherine Johnson,katherine@example.com,2024-01-06

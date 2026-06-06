@@ -1,0 +1,8 @@
+altimate_dbt_review_demo:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: demo.duckdb
+      schema: analytics
+      threads: 4

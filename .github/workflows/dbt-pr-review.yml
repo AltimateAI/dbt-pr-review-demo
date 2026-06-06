@@ -1,0 +1,51 @@
+name: Altimate dbt PR Review
+
+on:
+  pull_request:
+    paths:
+      - "models/**"
+      - "macros/**"
+      - "snapshots/**"
+      - "seeds/**"
+      - "dbt_project.yml"
+      - "packages.yml"
+      - "**/*.sql"
+      - "**/*.yml"
+      - "**/*.yaml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dbt-pr-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dbt
+        run: pip install "dbt-duckdb>=1.8,<2.0"
+
+      - name: Build compiled artifacts
+        env:
+          DBT_PROFILES_DIR: ${{ github.workspace }}
+        run: |
+          dbt seed
+          dbt compile
+
+      - name: Review dbt changes
+        uses: AltimateAI/altimate-code/github/review@v1
+        with:
+          mode: comment
+          manifest_path: target/manifest.json
+          severity_threshold: suggestion

@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Typed customer records from the synthetic seed.
+    columns:
+      - name: customer_id
+        description: Stable customer identifier.
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: Customer display name.
+      - name: email
+        description: Synthetic customer email used for the PII demo.
+
+  - name: stg_orders
+    description: Typed order records from the synthetic seed.
+    columns:
+      - name: order_id
+        description: Stable order identifier.
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Customer that placed the order.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+  - name: fct_customer_orders
+    description: One row per order with customer context.
+    columns:
+      - name: order_id
+        description: Primary key for the mart.
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Customer identifier.
+        data_tests:
+          - not_null
+      - name: customer_name
+        description: Customer display name.
+      - name: amount
+        description: Order amount in dollars.

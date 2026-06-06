@@ -1,0 +1,32 @@
+version: 1
+
+cases:
+  - branch: demo/safe-refactor
+    title: "Demo: safe CTE refactor"
+    description: Reorganizes the mart CTEs without changing output behavior.
+    expected_verdict: APPROVE
+
+  - branch: demo/join-key-breakage
+    title: "Demo: wrong join key changes order attribution"
+    description: Joins customer_id to order_id; SQL compiles but semantics change.
+    expected_verdict: REQUEST_CHANGES
+
+  - branch: demo/test-removal
+    title: "Demo: remove primary-key tests"
+    description: Removes not_null and unique tests from the mart order_id.
+    expected_verdict: COMMENT
+
+  - branch: demo/new-pii-exposure
+    title: "Demo: expose customer email in a mart"
+    description: Propagates a synthetic email column into the public mart.
+    expected_verdict: REQUEST_CHANGES
+
+  - branch: demo/mart-select-star
+    title: "Demo: SELECT star regression in a mart"
+    description: Replaces explicit mart columns with a SELECT star projection.
+    expected_verdict: COMMENT
+
+  - branch: demo/incremental-without-guard
+    title: "Demo: unsafe incremental conversion"
+    description: Adds incremental materialization without an is_incremental guard.
+    expected_verdict: COMMENT

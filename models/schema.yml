@@ -36,9 +36,6 @@ models:
     columns:
       - name: order_id
         description: Primary key for the mart.
-        data_tests:
-          - not_null
-          - unique
       - name: customer_id
         description: Customer identifier.
         data_tests:

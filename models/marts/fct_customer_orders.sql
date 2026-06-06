@@ -16,12 +16,8 @@ customers as (
 )
 
 select
-    orders.order_id,
-    orders.customer_id,
-    customers.customer_name,
-    orders.order_date,
-    orders.amount,
-    orders.status
+    orders.*,
+    customers.customer_name
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

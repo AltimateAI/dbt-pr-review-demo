@@ -25,3 +25,8 @@ select
 from orders
 left join customers
     on orders.customer_id = customers.customer_id
+where orders.customer_id not in (
+    select customer_id
+    from customers
+    where customer_id < 0
+)

@@ -21,7 +21,8 @@ select
     customers.customer_name,
     orders.order_date,
     orders.amount,
-    orders.status
+    orders.status,
+    current_timestamp as reviewed_at
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

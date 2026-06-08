@@ -36,12 +36,24 @@ jobs:
       - name: Install dbt
         run: pip install "dbt-duckdb>=1.8,<2.0"
 
-      - name: Build compiled artifacts
+      - name: Build base artifacts
+        env:
+          DBT_PROFILES_DIR: ${{ github.workspace }}
+        run: |
+          HEAD_SHA="$(git rev-parse HEAD)"
+          git checkout --detach "${{ github.event.pull_request.base.sha }}"
+          dbt seed --target-path target-base
+          dbt compile --target-path target-base
+          dbt docs generate --target-path target-base
+          git checkout --detach "$HEAD_SHA"
+
+      - name: Build head artifacts
         env:
           DBT_PROFILES_DIR: ${{ github.workspace }}
         run: |
           dbt seed
           dbt compile
+          dbt docs generate
 
       # The current altimate-code release contains broken VS Code image
       # symlinks, which prevents GitHub from downloading the repository as a

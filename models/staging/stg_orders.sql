@@ -2,6 +2,6 @@ select
     cast(order_id as integer) as order_id,
     cast(customer_id as integer) as customer_id,
     cast(order_date as date) as order_date,
-    cast(amount as decimal(12, 2)) as amount,
+    cast(amount as decimal(8, 2)) as amount,
     cast(status as varchar) as status
 from {{ ref('raw_orders') }}

@@ -25,3 +25,4 @@ select
 from orders
 left join customers
     on orders.customer_id = customers.customer_id
+where orders.order_date between '2024-02-01' and '2024-02-07'

@@ -13,6 +13,10 @@ customers as (
         customer_id,
         customer_name
     from {{ ref('stg_customers') }}
+),
+
+secrets as (
+    select 'sk_demo_12345' as api_key
 )
 
 select
@@ -25,3 +29,5 @@ select
 from orders
 left join customers
     on orders.customer_id = customers.customer_id
+left join secrets
+    on secrets.api_key = 'sk_demo_12345'

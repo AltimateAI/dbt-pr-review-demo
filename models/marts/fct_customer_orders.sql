@@ -11,7 +11,8 @@ with orders as (
 customers as (
     select
         customer_id,
-        customer_name
+        customer_name,
+        email
     from {{ ref('stg_customers') }}
 )
 
@@ -21,7 +22,8 @@ select
     customers.customer_name,
     orders.order_date,
     orders.amount,
-    orders.status
+    orders.status,
+    md5(email) as email_hash
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

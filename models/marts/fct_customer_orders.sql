@@ -15,7 +15,7 @@ customers as (
     from {{ ref('stg_customers') }}
 )
 
-select
+select distinct
     orders.order_id,
     orders.customer_id,
     customers.customer_name,

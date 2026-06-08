@@ -21,7 +21,8 @@ select
     customers.customer_name,
     orders.order_date,
     orders.amount,
-    orders.status
+    orders.status,
+    (select count(distinct customer_id) from orders) as distinct_customer_count
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

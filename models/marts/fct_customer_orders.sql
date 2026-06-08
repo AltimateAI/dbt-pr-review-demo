@@ -19,6 +19,7 @@ select
     orders.order_id,
     orders.customer_id,
     customers.customer_name,
+    cast(customers.customer_name as text) as customer_name_text,
     orders.order_date,
     orders.amount,
     orders.status

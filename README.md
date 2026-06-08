@@ -13,6 +13,7 @@ exposure, warehouse-cost regressions, and unsafe incremental configuration.
 python -m pip install "dbt-duckdb>=1.8,<2.0"
 dbt seed
 dbt build
+dbt docs generate
 ```
 
 Review a local branch with Altimate:

@@ -21,7 +21,8 @@ select
     customers.customer_name,
     orders.order_date,
     orders.amount,
-    orders.status
+    orders.status,
+    orders.amount / orders.customer_id as amount_per_customer_id
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

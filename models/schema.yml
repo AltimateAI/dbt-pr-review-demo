@@ -45,5 +45,3 @@ models:
           - not_null
       - name: customer_name
         description: Customer display name.
-      - name: amount
-        description: Order amount in dollars.

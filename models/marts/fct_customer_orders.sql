@@ -21,7 +21,8 @@ select
     customers.customer_name,
     orders.order_date,
     orders.amount,
-    orders.status
+    orders.status,
+    case when orders.status = 'completed' then 1 end as completed_flag
 from orders
 left join customers
     on orders.customer_id = customers.customer_id

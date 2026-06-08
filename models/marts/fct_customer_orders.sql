@@ -20,6 +20,7 @@ select
     orders.customer_id,
     customers.customer_name,
     orders.order_date,
+    orders.order_date + interval '1 day' as next_order_date,
     orders.amount,
     orders.status
 from orders

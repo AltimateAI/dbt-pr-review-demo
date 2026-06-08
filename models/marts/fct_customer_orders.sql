@@ -23,5 +23,5 @@ select
     orders.amount,
     orders.status
 from orders
-left join customers
+inner join customers
     on orders.customer_id = customers.customer_id

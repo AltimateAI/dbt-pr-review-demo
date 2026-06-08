@@ -6,6 +6,7 @@ with orders as (
         amount,
         status
     from {{ ref('stg_orders') }}
+    order by order_date
 ),
 
 customers as (

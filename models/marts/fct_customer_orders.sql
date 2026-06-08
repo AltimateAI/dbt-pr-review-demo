@@ -25,3 +25,4 @@ select
 from orders
 left join customers
     on orders.customer_id = customers.customer_id
+order by random()

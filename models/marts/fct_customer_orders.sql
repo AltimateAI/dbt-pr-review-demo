@@ -1,3 +1,5 @@
+{{ config(full_refresh=true) }}
+
 with orders as (
     select
         order_id,

@@ -20,6 +20,7 @@ select
     orders.customer_id,
     customers.customer_name,
     orders.order_date,
+    orders.order_date + 7 as ship_by_date,
     orders.amount,
     orders.status
 from orders

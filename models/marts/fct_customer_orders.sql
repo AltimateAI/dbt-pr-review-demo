@@ -20,6 +20,7 @@ select
     orders.customer_id,
     customers.customer_name,
     orders.order_date,
+    random() as sample_score,
     orders.amount,
     orders.status
 from orders

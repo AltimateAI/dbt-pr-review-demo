@@ -23,5 +23,6 @@ select
     orders.amount,
     orders.status
 from orders
-left join customers
+full outer join customers
     on orders.customer_id = customers.customer_id
+where orders.order_id is not null

@@ -32,7 +32,6 @@ models:
                 field: customer_id
 
   - name: fct_customer_orders
-    description: One row per order with customer context.
     columns:
       - name: order_id
         description: Primary key for the mart.
